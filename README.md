@@ -9,18 +9,18 @@ We will be very grateful for any feedback on how to improve our code, hence we'r
 # [Goals / Features]
 The goal was to create a cross-platform app that implemented the following features:
 // "-" indicates an unimplemented feature whereas "+" indicates an implemented feature. 
-+ tracking user's activity and dispaly it in an accessible way,
-- tracking user's localization after activating a training and then displaying it as a route on a map,
-+ register as a student or a teacher by invitation code (EDU Account),
-- teachers can access students' data as long as the students are a part of a class the teacher teaches,
-+ students can access their data, add activities, edit them and track their daily goals,
-- teachers can generate a .csv, .xlsx, .pdf or a .png file to display selected data:
-   - particular student's stats (daily activities, no. trainings done, time spent training),
-   - class' comparison (two or more),
-   - particular class's data (the same as with student but either as an average or total values),
-+ teachers can manage classes their classes (add / remove students from them),
-- register as a regular person,
-- Regular Account has the same features as the EDU Account, except for class-related features.
++ tracking user's activity and dispaly it in an accessible way, +
+- tracking user's localization after activating a training and then displaying it as a route on a map,-
++ register as a student or a teacher by invitation code (EDU Account),+
+- teachers can access students' data as long as the students are a part of a class the teacher teaches,-
++ students can access their data, add activities, edit them and track their daily goals,+
+- teachers can generate a .csv, .xlsx, .pdf or a .png file to display selected data:-
+   - particular student's stats (daily activities, no. trainings done, time spent training),-
+   - class' comparison (two or more),-
+   - particular class's data (the same as with student but either as an average or total values),-
++ teachers can manage classes their classes (add / remove students from them),+
+- register as a non-education related person,-
+- Regular Account has the same features as the EDU Account, except for class-related features.-
 
 # [TODO]
 Connecting the mobile app to the REST API that would handle user data.
@@ -37,22 +37,22 @@ Będziemy wielce wdzięczni za każdą opinię i każdą sugestię odnośnie pop
 # [Cele / Funkcjonalność]
 Celem było stworzenie wieloplatformowej aplikacji, która zawiera poniższe funkcje:
 // "-" oznacza niezaimplementowaną funkcję, natomiast "+" zaimplementowaną.
-+ śledzenie aktywności użytkownika i wyświetlanie jej w przystępny sposób,
-- śledzenie lokalizacji użytkownika po aktywowaniu treningu, po czym wyświetlenie jej jako trasa na mapie,
-+ rejestracja jako uczeń lub nauczyciel poprzez kod zaproszenia (Konto EDU),
-- nauczyciele mają dostęp do aktywności uczniów tylko wtedy, kiedy należą oni do klasy, którą nauczyciel uczy,
-+ uczniowie mają dostęp do swoich danych, aktywności, mogą je edytować i śledzić dzienne cele,
-- nauczyciele mogą wygenerować plik .csv, .xlsx, .pdf lub .png aby wyświetlić wybrany zbiór danych:
-   - dane konkretnego ucznia (dzienne aktywności, ilość wykonanych treningów, łączny czas treningu),
-   - porównanie klas (dwóch lub więcej),
-   - wyświetlanie danych konkretnej klasy (tak samo, jak danych ucznia z tym, że można wybrać czy jest to średnia czy łączna wartość wszystkich uczniów w klasie)
-+ nauczyciele mogą zarządzać klasami (dodawanie / usuwanie uczniów z klas)
-- rejestracja jako osoba niezwiązana z edukacją,
-- Zwykłe Konto posiada taką samą funkcjonalność, co Konto EDU za wyjątkiem funkcjonalności związanej z klasami.
++ śledzenie aktywności użytkownika i wyświetlanie jej w przystępny sposób,+
+- śledzenie lokalizacji użytkownika po aktywowaniu treningu, po czym wyświetlenie jej jako trasa na mapie,-
++ rejestracja jako uczeń lub nauczyciel poprzez kod zaproszenia (Konto EDU),+
+- nauczyciele mają dostęp do aktywności uczniów tylko wtedy, kiedy należą oni do klasy, którą nauczyciel uczy,-
++ uczniowie mają dostęp do swoich danych, aktywności, mogą je edytować i śledzić dzienne cele,+
+- nauczyciele mogą wygenerować plik .csv, .xlsx, .pdf lub .png aby wyświetlić wybrany zbiór danych:-
+   - dane konkretnego ucznia (dzienne aktywności, ilość wykonanych treningów, łączny czas treningu),-
+   - porównanie klas (dwóch lub więcej),-
+   - wyświetlanie danych konkretnej klasy (tak samo, jak danych ucznia z tym, że można wybrać czy jest to średnia czy łączna wartość wszystkich uczniów w klasie)-
++ nauczyciele mogą zarządzać klasami (dodawanie / usuwanie uczniów z klas)+
+- rejestracja jako osoba niezwiązana z edukacją,-
+- Zwykłe Konto posiada taką samą funkcjonalność, co Konto EDU za wyjątkiem funkcjonalności związanej z klasami.-
 
 # [TODO]
 Podpięcie aplikacji mobilnej do REST API, które będzie zajmowało się danymi użytkownika.
 Implementacja funkcji, które są wymogami projektu.
 Portowanie aplikacji na iOS oraz UWP, z dniem 5.03.2021 aplikacja działa tylko na przeglądarkach internetowych oraz była przetestowana na kilku urządzeniach z Androidem
 (w wersji 8, 9 i 10).
-# Naprawa błędów i implementacja logowania (spisywania aktywności aplikacji do pliku) celem łatwego analizowania i diagnozowania problemów.
+Naprawa błędów i implementacja logowania (spisywania aktywności aplikacji do pliku) celem łatwego analizowania i diagnozowania problemów.
