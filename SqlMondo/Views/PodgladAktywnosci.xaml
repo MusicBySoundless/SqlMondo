@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SqlMondo.Views.PodgladAktywnosci">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="EditSaveButton" Text="Edytuj"
+                     Clicked="OnEditButtonClicked" />
+        <ToolbarItem Text="Usuń"
+                     Clicked="OnDeleteButtonClicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Margin="20">
+        <Label x:Name="Label" Text=""
+               FontSize="Large" />
+        <Editor x:Name="Nazwa" Placeholder="Nazwa aktywności"
+                Text="{Binding Nazwa}" IsEnabled="False" />
+        <Picker x:Name="Rodzaj" SelectedIndex="{Binding RodzajId}"  SelectedItem="{Binding Rodzaj}" HorizontalOptions="FillAndExpand" Title="Rodzaj aktywności" IsEnabled="False">
+            <Picker.Items>
+                <x:String>Bieg</x:String>
+                <x:String>Inna</x:String>
+                <x:String>Jazda na rowerze</x:String>
+                <x:String>Spacer</x:String>
+            </Picker.Items>
+        </Picker>
+        <DatePicker x:Name="dataPicker" Date="{Binding Data}" Format="D"
+                    MinimumDate="01/01/2021" IsEnabled="False"/>
+        <Grid ColumnDefinitions="*,*">
+            <Label Text="Początek" />
+            <Label Grid.Column="1" Text="Koniec" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*">
+            <TimePicker x:Name="start" Time="{Binding StartTime}" IsEnabled="False"/>
+            <TimePicker Grid.Column="1" x:Name="end" Time="{Binding EndTime}" IsEnabled="False"/>
+        </Grid>
+
+        <Label Text="Inne" Margin="0, 20, 0, 0"/>
+        <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>
+        <Editor x:Name="Uwagi" Placeholder="Uwagi"
+                Text="{Binding Uwagi}" IsEnabled="False"/>
+        <Grid ColumnDefinitions="*,*">
+            <Editor x:Name="Kalorie" Placeholder="Kalorie"
+                    Text="{Binding Kalorie}" 
+                    Keyboard="Numeric" IsEnabled="False"/>
+            <Editor Grid.Column="1"
+                    x:Name="Kroki"
+                    Placeholder="Kroki"
+                    Text="{Binding Kroki}"
+                    Keyboard="Numeric" IsEnabled="False"/>
+            <Editor Grid.Row="1" Placeholder="Kilometry"
+                    x:Name="Kilometry"
+                    Text="{Binding Kilometry}"
+                    Keyboard="Numeric" IsEnabled="False"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SqlMondo.App">
+
+    <!-- Resources used by multiple pages in the application -->
+    <Application.Resources>
+
+        <Thickness x:Key="PageMargin">20</Thickness>
+
+        <!-- Colors -->
+        <Color x:Key="AppPrimaryColor">#FFA500</Color>
+        <Color x:Key="AppBackgroundColor">#FFFFFF</Color>
+        <Color x:Key="AppBackgroundColorDark">#121212</Color>
+        <Color x:Key="PrimaryColor">Black</Color>
+        <Color x:Key="SecondaryColor">White</Color>
+        <Color x:Key="TertiaryColor">Silver</Color>
+        <Color x:Key="TextColorLight">#CCCCCC</Color>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        </Style>
+        <Style TargetType="Editor">
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+            <Setter Property="PlaceholderColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TitleColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+        </Style>
+        <Style TargetType="TimePicker">
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#222222" Dark="#CCCCCC" />
+            </Setter>
+        </Style>
+
+
+        <!-- Implicit styles -->
+        <Style TargetType="ContentPage"
+               ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor">
+                <AppThemeBinding Light="#FFFFFF" Dark="#121212" />
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize"
+                    Value="Medium" />
+            <Setter Property="BackgroundColor">
+                <AppThemeBinding Light="#FFA500" Dark="#232323" />
+            </Setter>
+            <Setter Property="TextColor">
+                <AppThemeBinding Light="#FFFFFF" Dark="#FFA500" />
+            </Setter>
+            <Setter Property="CornerRadius"
+                    Value="5" />
+        </Style>
+
+    </Application.Resources>
+</Application>

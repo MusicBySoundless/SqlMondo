@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SqlMondo.Views.Podsumowanie"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:skiasharp="clr-namespace:SkiaSharp;assembly=SkiaSharp"
+             Title="Podsumowanie">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Konto"/>
+        <ToolbarItem Command="{Binding AddNew}" 
+                     Order="Secondary" 
+                     Priority="0" 
+                     Icon="other.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView"
+                     Command="{Binding RefreshCommand}"
+                     RefreshColor="#FFA500"
+                     BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#121212}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView>
+                <AbsoluteLayout BackgroundColor="{AppThemeBinding Light='#FFFFFF', Dark='#121212'}"
+                                IsClippedToBounds="False">
+                    <StackLayout
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand">
+                        <microcharts:ChartView x:Name="GoalsChart"
+                                               HeightRequest="300"
+                                               Margin="-300,0,-300,0"/>
+                        <Grid ColumnDefinitions="15,2*,15,2*"
+                              RowDefinitions="*,*"
+                              Margin="10"
+                              RowSpacing="20"
+                              HorizontalOptions="CenterAndExpand">
+                            <BoxView HeightRequest="15"
+                                     VerticalOptions="Center"
+                                     BackgroundColor="#1de4bd" 
+                                     CornerRadius="8"/>
+                            <Label Text="Kroki"
+                                   Grid.Column="1"
+                                   Margin="5,0,0,0"/>
+                            
+                            <BoxView HeightRequest="15"
+                                     VerticalOptions="Center"
+                                     BackgroundColor="#7d3ac1" 
+                                     Grid.Column="2"
+                                     CornerRadius="8"/>
+                            <Label Text="Kilometry"
+                                   Grid.Column="3"
+                                   Margin="5,0,0,0"/>
+                            
+                            <BoxView HeightRequest="15"
+                                     VerticalOptions="Center"
+                                     BackgroundColor="#eb548c" 
+                                     Grid.Row="1"
+                                     CornerRadius="8"/>
+                            <Label Text="Czas treningu"
+                                   Grid.Column="1"
+                                   Grid.Row="1"
+                                   Margin="5,0,0,0"/>
+                            
+                            <BoxView HeightRequest="15"
+                                     VerticalOptions="Center"
+                                     BackgroundColor="#ee9a3a" 
+                                     Grid.Column="2"
+                                     Grid.Row="1" 
+                                     CornerRadius="8"/>
+                            <Label Text="Ilość treningów"
+                                   Grid.Column="3"
+                                   Grid.Row="1"
+                                   Margin="5,0,0,0"/>
+                        </Grid>
+                        <Frame HasShadow="True"
+                               BackgroundColor="{AppThemeBinding Light=#EEEEEE, Dark=#232323}"
+                               CornerRadius="10"
+                               Margin="10,10,10,0"
+                               HeightRequest="95"
+                               Padding="10">
+                            <Grid ColumnDefinitions="4*,*,*,*,*,*,*,*"
+                                  RowDefinitions="*,1.5*,*">
+                                <Label Text="Ostatni tydzień"
+                                       FontSize="16" 
+                                       FontAttributes="Bold"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="1"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="2"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="3"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="4"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="5"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="6"
+                                       Grid.Row="1"/>
+                                <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
+                                       Grid.Column="7"
+                                       Grid.Row="1"/>
+                                <Label Text="Dzień tygodnia"
+                                       FontSize="15" 
+                                       Grid.Row="2"/>
+                                <Label Text="P"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="1"
+                                       Grid.Row="2" />
+                                <Label Text="W"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="2"
+                                       Grid.Row="2" />
+                                <Label Text="Ś"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="3"
+                                       Grid.Row="2" />
+                                <Label Text="C"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="4"
+                                       Grid.Row="2" />
+                                <Label Text="P"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="5"
+                                       Grid.Row="2" />
+                                <Label Text="S"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="6"
+                                       Grid.Row="2" />
+                                <Label Text="N"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="7"
+                                       Grid.Row="2" />
+                            </Grid>
+                        </Frame>
+                        <Frame HasShadow="True"
+                               BackgroundColor="{AppThemeBinding Light=#EEEEEE, Dark=#232323}"
+                               CornerRadius="10"
+                               Margin="10,10,10,0"
+                               HeightRequest="95"
+                               Padding="10">
+                            <Label Text="Kroki"/>
+                        </Frame>
+                        <Frame HasShadow="True"
+                               BackgroundColor="{AppThemeBinding Light=#EEEEEE, Dark=#232323}"
+                               CornerRadius="10"
+                               Margin="10,10,10,0"
+                               HeightRequest="95"
+                               Padding="10">
+                            <Label Text="Kroki"/>
+                        </Frame>
+                    </StackLayout>
+                    <!--<Frame WidthRequest="56"
+                           HeightRequest="56"
+                           CornerRadius="28"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           AbsoluteLayout.LayoutBounds=".95,.95,56,56"
+                           Padding="0"
+                           HasShadow="True">
+                        <Button FontSize="50"
+                                Margin="0"
+                                Text="+"
+                                CornerRadius="28"
+                                WidthRequest="100"
+                                HeightRequest="100"
+                                Padding="0,-8,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Clicked="OnAddClicked" />
+                    </Frame>-->
+                </AbsoluteLayout>
+            
+            </ScrollView>
+        </RefreshView>
+
+    </ContentPage.Content>
+</ContentPage>

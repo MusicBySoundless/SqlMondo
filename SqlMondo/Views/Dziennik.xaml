@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontAwesome="clr-namespace:FontAwesome"
+             x:Class="SqlMondo.Views.Dziennik"
+             Title="Dziennik">
+
+    <ContentPage.Resources>
+        <!-- Define a visual state for the Selected state of the CollectionView -->
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource AppPrimaryColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Add an item to the toolbar -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Konto"
+                     Clicked="OnAccClicked" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout Margin="10,0,10,0">
+
+        <!-- Display notes in a list -->
+        <CollectionView x:Name="collectionView"
+                        Margin="0"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged"
+                        >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <!-- Define the appearance of each item in the list -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame HasShadow="True"
+                           BackgroundColor="{AppThemeBinding Light=#EEEEEE, Dark=#232323}"
+                           CornerRadius="10"
+                               Margin="0,10,0,0">
+                            <Grid ColumnDefinitions="2*,2*,*">
+                                <Label x:Name="CzasRozpoczecia" Text="{Binding ShownDate}" />
+
+                                <Label x:Name="Rodzaj" Text="{Binding Rodzaj}" Grid.Row="1" FontAttributes="Bold"/>
+                                <!--<Label x:Name="Rodzaj"
+                                       Grid.Row="1"
+                                       FontAttributes="Bold">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Rodzaj" />
+                                            <Binding Path="Nazwa" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>-->
+                                <Label x:Name="Dane"
+                                       Grid.Row="2">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Kilometry" />
+                                            <Binding Path="Duration" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label x:Name="Kroki" Text="{Binding Kroki}" 
+                                       Grid.Row="2"
+                                       Grid.Column="1"/>
+                                <Frame Grid.RowSpan="3"
+                                       Grid.Column="2"
+                                       Margin="5"
+                                       Padding="15"
+                                       CornerRadius="50"
+                                       HasShadow="True"
+                                       BackgroundColor="{StaticResource AppPrimaryColor}"
+                                       >
+                                    <Image x:Name="Icon"
+                                           Scale="1.4">
+                                        <Image.Triggers>
+                                            <!--<Trigger TargetType="Image"
+                                                     Property="Source"
+                                                     Value="other.png">
+                                                
+                                            </Trigger>-->
+
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Inna">
+                                                <Setter Property="Source" Value="other.png" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Bieg">
+                                                <Setter Property="Source" Value="run.png" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Spacer">
+                                                <Setter Property="Source" Value="walk.png" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image"
+                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Jazda na rowerze">
+                                                <Setter Property="Source" Value="bike.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Frame 
+            WidthRequest="56"
+            HeightRequest="56"
+            CornerRadius="28"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".95,.95,56,56"
+            Padding="0"
+            HasShadow="true"
+            >
+            <Button FontSize="50"
+                Margin="0"
+                Text="+"
+                CornerRadius="28"
+                WidthRequest="100"
+                HeightRequest="100"
+                Padding="0,-8,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnAddClicked"/>
+        </Frame>
+    </AbsoluteLayout>
+
+</ContentPage>

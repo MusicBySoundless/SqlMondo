@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:SqlMondo.Views"
+       x:Class="SqlMondo.AppShell">
+
+    <Shell.Resources>
+        <!-- Style Shell elements -->
+        <Style x:Key="BaseStyle"
+               TargetType="Element">
+            <Setter Property="Shell.BackgroundColor">
+                <AppThemeBinding Light="#FFA500" Dark="#232323" />
+            </Setter>
+            <!--<Setter Property="Shell.ForegroundColor"
+                    Value="{StaticResource SecondaryColor}" />-->
+            <Setter Property="Shell.TitleColor">
+                <AppThemeBinding Light="White" Dark="#FFA500" />
+            </Setter>
+            <Setter Property="Shell.TabBarUnselectedColor"
+                    Value="#95FFFFFF"/>
+        </Style>
+        <Style TargetType="TabBar"
+               BasedOn="{StaticResource BaseStyle}" />
+    </Shell.Resources>
+    
+    <!-- Display a bottom tab bar containing two tabs -->
+    <TabBar>
+        <ShellContent
+            Icon="summary.png"
+            ContentTemplate="{DataTemplate views:Podsumowanie}" 
+            Title="Podsumowanie"/>
+        <ShellContent
+            Icon="dziennik.png"
+            ContentTemplate="{DataTemplate views:Dziennik}"
+            Title="Dziennik"/>
+        <ShellContent 
+            Icon="profil.png"
+            ContentTemplate="{DataTemplate views:Profil}"
+            Title="Profil"/>
+    </TabBar>
+</Shell>
