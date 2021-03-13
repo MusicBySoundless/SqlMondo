@@ -20,27 +20,6 @@
                         HorizontalOptions="FillAndExpand"
                         Title="Dzienny cel kroków"
                         Unfocused="Element_Unfocused">
-                    <Picker.Items>
-                        <x:String>1000</x:String>
-                        <x:String>1500</x:String>
-                        <x:String>2000</x:String>
-                        <x:String>2500</x:String>
-                        <x:String>3000</x:String>
-                        <x:String>3500</x:String>
-                        <x:String>4000</x:String>
-                        <x:String>4500</x:String>
-                        <x:String>5000</x:String>
-                        <x:String>5500</x:String>
-                        <x:String>6000</x:String>
-                        <x:String>6500</x:String>
-                        <x:String>7000</x:String>
-                        <x:String>7500</x:String>
-                        <x:String>8000</x:String>
-                        <x:String>8500</x:String>
-                        <x:String>9000</x:String>
-                        <x:String>9500</x:String>
-                        <x:String>10000</x:String>
-                    </Picker.Items>
                 </Picker>
 
                 <Label Grid.Column="1" Text="Kilometry" FontSize="Micro"

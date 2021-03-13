@@ -4,6 +4,7 @@ using System.IO;
 using static SqlMondo.UtilityMethods;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Collections.Generic;
 
 namespace SqlMondo.Views
 {
@@ -13,6 +14,25 @@ namespace SqlMondo.Views
         public Profil()
         {
             InitializeComponent();
+            var kroki = new List<string>();
+            int x = 0;
+            while (x <= 30000)
+            {
+                kroki.Add(x.ToString());
+                x += 500;
+            }
+            CelKroki.ItemsSource = kroki;
+            ProfileSettings settings = UtilityMethods.ReadSettings();
+            for (int i = 0; i < kroki.Count; i++)
+            {
+                if (kroki[i] == settings.CelKroki)
+                {
+                    CelKroki.SelectedIndex = i;
+                    settings.CelKrokiId = i;
+                    UtilityMethods.SaveFile(settings, App.FolderPath, "settings.json");
+                    break;
+                }
+            }
             CheckPerm();
         }
 
@@ -21,7 +41,7 @@ namespace SqlMondo.Views
             base.OnAppearing();
             try
             {
-                ProfileSettings settings=UtilityMethods.ReadSettings();
+                ProfileSettings settings = UtilityMethods.ReadSettings();
                 BindingContext = settings;
                 CzasTreningu.Text = settings.CzasTreninguCel.TotalHours.ToString();
             }
@@ -29,6 +49,7 @@ namespace SqlMondo.Views
             {
                 Console.WriteLine(ex.ToString());
             }
+
         }
 
         public class ProfileSettings
