@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-
+using static SqlMondo.UtilityMethods;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +13,7 @@ namespace SqlMondo.Views
         public Profil()
         {
             InitializeComponent();
-            BindingContext = new ProfileSettings();
+            CheckPerm();
         }
 
         protected override void OnAppearing()
@@ -21,25 +21,9 @@ namespace SqlMondo.Views
             base.OnAppearing();
             try
             {
-                var profilePath = Path.Combine(App.FolderPath, "profile.json");
-                if (!File.Exists(profilePath)||File.ReadAllText(profilePath) == "")
-                {
-                    ProfileSettings settings = new ProfileSettings();
-                    settings = (ProfileSettings)BindingContext;
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.NullValueHandling = NullValueHandling.Ignore;
-                    using (StreamWriter sw = new StreamWriter(@profilePath))
-                    using (JsonWriter writer = new JsonTextWriter(sw))
-                    {
-                        serializer.Serialize(writer, settings);
-                    }
-                    BindingContext = settings;
-                }
-                else
-                {
-                    ProfileSettings settings = JsonConvert.DeserializeObject<ProfileSettings>(File.ReadAllText(@profilePath));
-                    BindingContext = settings;
-                }
+                ProfileSettings settings=UtilityMethods.ReadSettings();
+                BindingContext = settings;
+                CzasTreningu.Text = settings.CzasTreninguCel.TotalHours.ToString();
             }
             catch (Exception ex)
             {
@@ -53,68 +37,34 @@ namespace SqlMondo.Views
             public int CelKrokiId { get; set; }
             public string KilometryCel { get; set; }
             public string IloscTreningowCel { get; set; }
-            public string CzasTreninguCel { get; set; }
-            public string Plec { get; set; }
-            public int PlecId { get; set; }
-            public DateTime DataUr { get; set; }
-            public string Waga { get; set; }
-            public string Wzrost { get; set; }
+            public TimeSpan CzasTreninguCel { get; set; }
             public bool DarkMode { get; set; }
             public bool UseSystemTheme { get; set; }
-
+            public bool CompletedSetup { get; set; }
         }
 
         private void Element_Unfocused(object sender, FocusEventArgs e)
         {
-            try
-            {
-                var profilePath = Path.Combine(App.FolderPath, "profile.json");
-                ProfileSettings saveSettings = new ProfileSettings();
-                saveSettings = (ProfileSettings)BindingContext;
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.NullValueHandling = NullValueHandling.Ignore;
-                using (StreamWriter sw = new StreamWriter(@profilePath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, saveSettings);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            ProfileSettings saveSettings = (ProfileSettings)BindingContext;
+            saveSettings.CzasTreninguCel = TimeSpan.FromHours(Convert.ToDouble(CzasTreningu.Text));
+            Console.WriteLine(saveSettings.ToString());
+            UtilityMethods.SaveFile(saveSettings, App.FolderPath, "settings.json");
         }
 
         public void OnDarkModeToggled(object sender, EventArgs e)
         {
             try
             {
-                var profilePath = Path.Combine(App.FolderPath, "profile.json");           
-                ProfileSettings settings = JsonConvert.DeserializeObject<ProfileSettings>(File.ReadAllText(@profilePath));
-                settings = (ProfileSettings)BindingContext;
-                Console.WriteLine("BS: settings.DarkMode: " + settings.DarkMode);
-                Console.WriteLine("BS: OSAppTheme: " + Application.Current.UserAppTheme);
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.NullValueHandling = NullValueHandling.Ignore;
-                using (StreamWriter sw = new StreamWriter(@profilePath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, settings);
-                }
+                ProfileSettings settings = (ProfileSettings)BindingContext;
+                UtilityMethods.SaveFile(settings, App.FolderPath, "settings.json");
                 if (settings.DarkMode)
                 {
-                    Console.WriteLine("Tryb nocny wł.");
-
                     Application.Current.UserAppTheme = OSAppTheme.Dark;
                 }
                 else
                 {
-                    Console.WriteLine("Tryb nocny wył.");
                     Application.Current.UserAppTheme = OSAppTheme.Light;
-
                 }
-                Console.WriteLine("AS: settings.DarkMode: " + settings.DarkMode);
-                Console.WriteLine("AS: OSAppTheme: " + Application.Current.UserAppTheme);
             }
             catch (Exception ex)
             {
@@ -125,16 +75,8 @@ namespace SqlMondo.Views
         {
             try
             {
-                var profilePath = Path.Combine(App.FolderPath, "profile.json");
-                ProfileSettings settings = JsonConvert.DeserializeObject<ProfileSettings>(File.ReadAllText(@profilePath));
-                settings = (ProfileSettings)BindingContext;
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.NullValueHandling = NullValueHandling.Ignore;
-                using (StreamWriter sw = new StreamWriter(@profilePath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, settings);
-                }
+                ProfileSettings settings = (ProfileSettings)BindingContext;
+                UtilityMethods.SaveFile(settings, App.FolderPath, "settings.json");
                 if (settings.UseSystemTheme)
                 {
                     Application.Current.UserAppTheme = OSAppTheme.Unspecified;

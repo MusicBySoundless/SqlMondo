@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using Plugin.Permissions;
+using static SqlMondo.UtilityMethods;
 using SqlMondo.Models;
 using Xamarin.Forms;
 
@@ -31,17 +31,17 @@ namespace SqlMondo.Views
             try
             {
                 Activity notka = JsonConvert.DeserializeObject<Activity>(File.ReadAllText(@filename));
-                notka.Filename = filename;
-                if (notka.Rodzaj == "Inne")
+                notka.Filepath = filename;
+                if (notka.Type == "Inne")
                 {
-                    Label.Text = "Inna aktywność z dnia " + notka.Data.ToString().Substring(0, 9);
+                    Label.Text = "Inna aktywność z dnia " + notka.Date.ToString().Substring(0, 9);
                 }
                 else
                 {
-                    Label.Text = notka.Rodzaj.ToString() + " z dnia " + notka.Data.ToString().Substring(0, 9);
+                    Label.Text = notka.Type.ToString() + " z dnia " + notka.Date.ToString().Substring(0, 9);
                 }
-                Nazwa.Text = notka.Nazwa;
-                Rodzaj.SelectedIndex = notka.RodzajId;
+                Nazwa.Text = notka.Name;
+                Rodzaj.SelectedIndex = notka.TypeId;
                 BindingContext = notka;
             }
             catch (Exception)
@@ -53,24 +53,26 @@ namespace SqlMondo.Views
         void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var note = (Activity)BindingContext;
-            var filepath = note.Filename;
+            var filepath = note.Filepath;
 
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-                // Update the file
-                using (StreamWriter sw = new StreamWriter(@filepath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, note);
-                }
-            //}
-            if (note.Rodzaj == "Inna")
+            JsonSerializer serializer = new JsonSerializer
             {
-                Label.Text = "Inna aktywność z dnia " + note.Data.ToString().Substring(0, 9);
+                NullValueHandling = NullValueHandling.Ignore
+            };
+            // Update the file
+            using (StreamWriter sw = new StreamWriter(@filepath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, note);
+            }
+            //}
+            if (note.Type == "Inna")
+            {
+                Label.Text = "Inna aktywność z dnia " + note.Date.ToString().Substring(0, 9);
             }
             else
             {
-                Label.Text = note.Rodzaj.ToString() + " z dnia " + note.Data.ToString().Substring(0, 9);
+                Label.Text = note.Type.ToString() + " z dnia " + note.Date.ToString().Substring(0, 9);
             }
             Nazwa.IsEnabled = false;
             Rodzaj.IsEnabled = false;
@@ -107,28 +109,20 @@ namespace SqlMondo.Views
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             var note = (Activity)BindingContext;
-            App.DailyStatsHandler(DateTime.Today, delete: true, deletedFile: note.Filename);
+            App.DailyStatsHandler(DateTime.Today, delete: true, deletedFile: note.Filepath);
             // Delete the file.
-            if (File.Exists(note.Filename))
+            if (File.Exists(note.Filepath))
             {
-                File.Delete(note.Filename);
+                File.Delete(note.Filepath);
                 await Shell.Current.GoToAsync("..");
             }
             else
             {
-                await DisplayAlert("Alert", "Nie znaleziono pliku " + note.Filename, "OK");
+                await DisplayAlert("Alert", "Nie znaleziono pliku " + note.Filepath, "OK");
             }
-            
+
             // Navigate backwards
 
-        }
-        async void CheckPerm()
-        {
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
-            if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
-            {
-                status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
-            }
         }
     }
 }

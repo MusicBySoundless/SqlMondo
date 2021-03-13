@@ -5,19 +5,19 @@
     <ContentPage.Content>
         <StackLayout Margin="0">
             <Label Text="Profil"
-                   FontSize="Title" 
+                   FontSize="Title"
                    Margin="20,20,0,0"/>
             <Label Text="Cele aktywności"
-                   FontSize="Small" 
+                   FontSize="Small"
                    Margin="20,0,0,0"/>
             <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>
             <Grid ColumnDefinitions="*,*"
                   Margin="20,0,20,0">
                 <Label Text="Kroki" FontSize="Micro"
                        Margin="0"/>
-                <Picker x:Name="CelKroki" SelectedItem="{Binding CelKroki}" 
-                        SelectedIndex="{Binding CelKrokiId}" 
-                        HorizontalOptions="FillAndExpand" 
+                <Picker x:Name="CelKroki" SelectedItem="{Binding CelKroki}"
+                        SelectedIndex="{Binding CelKrokiId}"
+                        HorizontalOptions="FillAndExpand"
                         Title="Dzienny cel kroków"
                         Unfocused="Element_Unfocused">
                     <Picker.Items>
@@ -42,31 +42,31 @@
                         <x:String>10000</x:String>
                     </Picker.Items>
                 </Picker>
-                
+
                 <Label Grid.Column="1" Text="Kilometry" FontSize="Micro"
                        Margin="0"/>
                 <Editor x:Name="Kilometry" Grid.Column="1" Placeholder="Kilometry"
-                        Text="{Binding KilometryCel}" 
+                        Text="{Binding KilometryCel}"
                         Keyboard="Numeric" Unfocused="Element_Unfocused"/>
 
                 <Label Grid.Row="1" Text="Ilość treningów" FontSize="Micro"
                        Margin="0"/>
                 <Editor x:Name="IloscTreningow" Grid.Row="1" Placeholder="Ilość treningów"
-                        Text="{Binding IloscTreningowCel}" 
+                        Text="{Binding IloscTreningowCel}"
                         Keyboard="Numeric" Unfocused="Element_Unfocused"/>
-                
+
                 <Label Grid.Column="1" Grid.Row="1" Text="Czas Treningu (godz.)" FontSize="Micro"
                        Margin="0"/>
                 <Editor x:Name="CzasTreningu" Grid.Column="1" Grid.Row="1" Placeholder="Czas treningu (godz.)"
-                        Text="{Binding CzasTreninguCel}" 
+                        Text="{Binding CzasTreninguCel}"
                         Keyboard="Numeric" Unfocused="Element_Unfocused"/>
             </Grid>
-            <Label Text="Informacje o Tobie" Margin="20, 20, 0, 0"
+            <!--<Label Text="Informacje o Tobie" Margin="20, 20, 0, 0"
                    FontSize="Small"/>
-            <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>
+            <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>-->
             <Grid ColumnDefinitions="*,*"
                   Margin="20,0,20,0">
-                <Label Text="Płeć" FontSize="Micro"
+                <!--<Label Text="Płeć" FontSize="Micro"
                        Margin="0"/>
                 <Picker x:Name="Plec" SelectedItem="{Binding Plec}" SelectedIndex="{Binding PlecId}" HorizontalOptions="FillAndExpand" Title="Płeć"
                         Unfocused="Element_Unfocused">
@@ -90,15 +90,15 @@
                 <Editor Grid.Row="1" Grid.Column="1" x:Name="Wzrost" Placeholder="Wzrost"
                     Text="{Binding Wzrost}"
                     Keyboard="Numeric"
-                        Unfocused="Element_Unfocused"/>
-                <Label Text="Tryb nocny" 
+                        Unfocused="Element_Unfocused"/>-->
+                <Label Text="Tryb nocny"
                        Grid.Row="2"
                        FontSize="20"
                        Padding="0,7,0,0"/>
                 <Switch Grid.Row="2"
                         x:Name="DarkMode"
                         OnColor="#CCCCCC"
-                        ThumbColor="{StaticResource AppPrimaryColor}" Unfocused="Element_Unfocused" IsToggled="{Binding DarkMode}" 
+                        ThumbColor="{StaticResource AppPrimaryColor}" Unfocused="Element_Unfocused" IsToggled="{Binding DarkMode}"
                         Toggled="OnDarkModeToggled">
                     <Switch.Triggers>
                         <Trigger TargetType="Switch"
@@ -106,7 +106,7 @@
                             <Setter Property="ThumbColor" Value="LightGray" />
                         </Trigger>
                         <DataTrigger TargetType="Switch"
-                                     Binding="{Binding Source={x:Reference UseSystemTheme}, Path=IsChecked}" 
+                                     Binding="{Binding Source={x:Reference UseSystemTheme}, Path=IsChecked}"
                                      Value="True">
                             <Setter Property="IsEnabled" Value="False" />
                             <Setter Property="ThumbColor" Value="LightGray" />
@@ -114,7 +114,7 @@
                         </DataTrigger>
                     </Switch.Triggers>
                 </Switch>
-                <Label Text="Jak w urządzeniu" 
+                <Label Text="Jak w urządzeniu"
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
@@ -123,7 +123,7 @@
                 <CheckBox x:Name="UseSystemTheme"
                           IsChecked="{Binding UseSystemTheme}"
                           CheckedChanged="ChangeTheme"
-                          Color="{StaticResource AppPrimaryColor}" 
+                          Color="{StaticResource AppPrimaryColor}"
                           Grid.Row="2"
                           Grid.Column="1"
                           Margin="155,0,0,0">

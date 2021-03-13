@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using SqlMondo.Models;
 using Xamarin.Forms;
+using static SqlMondo.UtilityMethods;
 
 namespace SqlMondo.Views
 {
@@ -13,6 +14,7 @@ namespace SqlMondo.Views
         public Dziennik()
         {
             InitializeComponent();
+            CheckPerm();
         }
 
         protected override void OnAppearing()
@@ -31,13 +33,13 @@ namespace SqlMondo.Views
                     TimeSpan duration = activity.EndTime - activity.StartTime;
                     Activity readActivity = new Activity
                     {
-                        Filename = filename,
-                        Nazwa = activity.Nazwa,
+                        Filepath = filename,
+                        Name = activity.Name,
                         StartTime = activity.StartTime,
-                        Rodzaj = activity.Rodzaj,
-                        Kroki = "Kroki: " + activity.Kroki,
-                        ShownDate = activity.Data.ToString("dd-MM-yy"),
-                        Kilometry = Math.Round(System.Convert.ToDecimal(activity.Kilometry), 3).ToString() + " km"
+                        Type = activity.Type,
+                        Steps = "Kroki: " + activity.Steps,
+                        ShownDate = activity.Date.ToString("dd-MM-yy"),
+                        Kilometres = Math.Round(System.Convert.ToDecimal(activity.Kilometres), 3).ToString() + " km"
                     };
                     if (duration.Hours == 0)
                     {
@@ -58,9 +60,6 @@ namespace SqlMondo.Views
             }
         }
 
-
-        
-
         async void OnAddClicked(object sender, EventArgs e)
         {
             // Navigate to the NoteEntryPage, without passing any data.
@@ -80,7 +79,7 @@ namespace SqlMondo.Views
             {
                 // Navigate to the NoteEntryPage, passing the filename as a query parameter.
                 Activity note = (Activity)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(PodgladAktywnosci)}?{nameof(PodgladAktywnosci.ItemId)}={note.Filename}");
+                await Shell.Current.GoToAsync($"{nameof(PodgladAktywnosci)}?{nameof(PodgladAktywnosci.ItemId)}={note.Filepath}");
             }
         }
 
@@ -88,7 +87,6 @@ namespace SqlMondo.Views
         {
             await Navigation.PushAsync(new Konto());
         }
-        
     }
 
 }

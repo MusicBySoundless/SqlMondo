@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SqlMondo.FirstSetupPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid ColumnDefinitions="100, *, 100"
+                  RowDefinitions="50, 70,*,70, 50"
+                  VerticalOptions="FillAndExpand"
+                  Margin="20">
+                <Label Text="Witaj w SQLMondo!"
+                       Grid.ColumnSpan="3"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="30"/>
+                <Label Text="Za chwilę przeprowadzimy Ciebie przez krótką konfigurację wstępną."
+                       Grid.ColumnSpan="3"
+                       Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       FontSize="18"/>
+                <Label Text="Kiedy będziesz gotowy, naciśnij przycisk &#x0022;Rozpocznij&#x0022;"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="3"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       FontSize="18"/>
+                <Frame Grid.ColumnSpan="3"
+                       Grid.Row="4"
+                       BackgroundColor="#FFA500"/>
+                <Button Text="Rozpocznij"
+                        Clicked="StartSetup"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="4"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

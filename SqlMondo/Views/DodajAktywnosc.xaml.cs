@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Plugin.Permissions;
 using SqlMondo.Models;
 using Xamarin.Forms;
+using static SqlMondo.UtilityMethods;
 
 namespace SqlMondo.Views
 {
@@ -14,7 +15,7 @@ namespace SqlMondo.Views
         {
             set
             {
-                LoadNote(value);
+                LoadActivity(value);
             }
         }
 
@@ -24,9 +25,9 @@ namespace SqlMondo.Views
             try
             {
                 CheckPerm();
-
-                // Set the BindingContext of the page to a new Note.
+                // Set the BindingContext of the page to a new Activity object.
                 BindingContext = new Activity();
+                // Initialize data into few pickers
                 dataPicker.Date = DateTime.Today;
                 TimeSpan now = DateTime.Now.TimeOfDay;
                 start.Time = now;
@@ -38,43 +39,38 @@ namespace SqlMondo.Views
             }
         }
 
-        void LoadNote(string filename)
+        void LoadActivity(string filename)
         {
             try
             {
-                Activity notka = JsonConvert.DeserializeObject<Activity>(File.ReadAllText(@filename));
-                Nazwa.Text = notka.Nazwa;
-                Rodzaj.SelectedIndex = notka.RodzajId;
-                BindingContext = notka;
+                // Read and deserialize .json into new Activity object, then set it as Binding Context.
+                Activity activity = JsonConvert.DeserializeObject<Activity>(File.ReadAllText(@filename));
+                BindingContext = activity;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Nie udało się załadować aktywności.");
+                Console.WriteLine(ex.ToString());
             }
         }
 
+        // File saving method. Probably will put it in a separate class.
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             try
             {
-                                var activity = (Activity)BindingContext;
-                var filepath = activity.Filename;
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.NullValueHandling = NullValueHandling.Ignore;
-                // Save the file.
-                var FilePath = Path.Combine(App.FolderPath, "activities/");
-                DirectoryInfo di = new DirectoryInfo(@FilePath);
-                if (!di.Exists)
-                {
-                    Directory.CreateDirectory(FilePath);
-                }
-                var filename = Path.Combine(FilePath, $"{GetFileName(1, activity.Data)}.json");
-                using (StreamWriter sw = new StreamWriter(@filename))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, activity);
-                }
+                // Set Binding Context to a new Activity object.
+                Activity activity = (Activity)BindingContext;
 
+                Console.WriteLine(activity.ToString());
+
+                // Get filepath of the file.
+                var filepath = activity.Filepath;
+                // Generate new filepath and
+                var activitiesPath = Path.Combine(App.FolderPath, "activities/");
+
+                SaveFile(activity, activitiesPath, $"{GetFileName(activity.Date)}.json");
+
+                // Add stats from new activity to daily activities object.
                 App.DailyStatsHandler(DateTime.Today, add: true);
             }
             catch (Exception ex)
@@ -82,11 +78,17 @@ namespace SqlMondo.Views
                 Console.WriteLine(ex.ToString());
             }
 
-            // Navigate backwards
+            // Navigate backwards.
             await Shell.Current.GoToAsync("..");
         }
 
-        private string GetFileName(int i, DateTime date)
+        /// <summary>
+        /// Generates filename based on provided date and file iterator. Iterator defaults to 1 if not provided.
+        /// </summary>
+        /// <param name="date">Specify the date of the activity.</param>
+        /// <param name="i">Optional iterator parameter which is added to the end of the file so that there's no two files with the same name.</param>
+        /// <returns>File path with file name ready to be used in File.* and System.IO methods.</returns>
+        private string GetFileName(DateTime date, int i = 1)
         {
             string FileName = date.ToString("dd") + "_" + date.ToString("MM") + "_" + date.ToString("yyyy") + "_" + i;
             var FilePath = Path.Combine(App.FolderPath, "activities/", $"{FileName}.json");
@@ -95,7 +97,7 @@ namespace SqlMondo.Views
                 if(File.Exists(FilePath))
                 {
                     i++;
-                    return GetFileName(i, date);
+                    return GetFileName(date, i);
                 }
                 else
                 {
@@ -116,9 +118,9 @@ namespace SqlMondo.Views
             // Delete the file.
             try
             {
-                if (File.Exists(activity.Filename))
+                if (File.Exists(activity.Filepath))
                 {
-                    File.Delete(activity.Filename);
+                    File.Delete(activity.Filepath);
                 }
             }
             catch (Exception ex)
@@ -133,21 +135,6 @@ namespace SqlMondo.Views
         void OnPropertyChanged(object sender, EventArgs e)
         {
             end.Time = start.Time + TimeSpan.FromHours(1);
-        }
-        async void CheckPerm()
-        {
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
-            if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
-            {
-                try
-                {
-                    status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
         }
     }
 }
