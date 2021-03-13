@@ -5,10 +5,11 @@
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:skiasharp="clr-namespace:SkiaSharp;assembly=SkiaSharp"
              Title="Podsumowanie">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Konto"/>
-        <ToolbarItem Command="{Binding AddNew}" 
-                     Order="Secondary" 
-                     Priority="0" 
+        <ToolbarItem Text="Konto"
+                     Clicked="OnAccClicked"/>
+        <ToolbarItem Command="{Binding AddNew}"
+                     Order="Secondary"
+                     Priority="0"
                      Icon="other.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -35,36 +36,36 @@
                               HorizontalOptions="CenterAndExpand">
                             <BoxView HeightRequest="15"
                                      VerticalOptions="Center"
-                                     BackgroundColor="#1de4bd" 
+                                     BackgroundColor="#1de4bd"
                                      CornerRadius="8"/>
                             <Label Text="Kroki"
                                    Grid.Column="1"
                                    Margin="5,0,0,0"/>
-                            
+
                             <BoxView HeightRequest="15"
                                      VerticalOptions="Center"
-                                     BackgroundColor="#7d3ac1" 
+                                     BackgroundColor="#7d3ac1"
                                      Grid.Column="2"
                                      CornerRadius="8"/>
                             <Label Text="Kilometry"
                                    Grid.Column="3"
                                    Margin="5,0,0,0"/>
-                            
+
                             <BoxView HeightRequest="15"
                                      VerticalOptions="Center"
-                                     BackgroundColor="#eb548c" 
+                                     BackgroundColor="#eb548c"
                                      Grid.Row="1"
                                      CornerRadius="8"/>
                             <Label Text="Czas treningu"
                                    Grid.Column="1"
                                    Grid.Row="1"
                                    Margin="5,0,0,0"/>
-                            
+
                             <BoxView HeightRequest="15"
                                      VerticalOptions="Center"
-                                     BackgroundColor="#ee9a3a" 
+                                     BackgroundColor="#ee9a3a"
                                      Grid.Column="2"
-                                     Grid.Row="1" 
+                                     Grid.Row="1"
                                      CornerRadius="8"/>
                             <Label Text="Ilość treningów"
                                    Grid.Column="3"
@@ -80,7 +81,7 @@
                             <Grid ColumnDefinitions="4*,*,*,*,*,*,*,*"
                                   RowDefinitions="*,1.5*,*">
                                 <Label Text="Ostatni tydzień"
-                                       FontSize="16" 
+                                       FontSize="16"
                                        FontAttributes="Bold"/>
                                 <Frame BackgroundColor="{AppThemeBinding Light=Blue, Dark=LightBlue}"
                                        Grid.Column="1"
@@ -104,7 +105,7 @@
                                        Grid.Column="7"
                                        Grid.Row="1"/>
                                 <Label Text="Dzień tygodnia"
-                                       FontSize="15" 
+                                       FontSize="15"
                                        Grid.Row="2"/>
                                 <Label Text="P"
                                        HorizontalTextAlignment="Center"
@@ -153,26 +154,7 @@
                             <Label Text="Kroki"/>
                         </Frame>
                     </StackLayout>
-                    <!--<Frame WidthRequest="56"
-                           HeightRequest="56"
-                           CornerRadius="28"
-                           AbsoluteLayout.LayoutFlags="PositionProportional"
-                           AbsoluteLayout.LayoutBounds=".95,.95,56,56"
-                           Padding="0"
-                           HasShadow="True">
-                        <Button FontSize="50"
-                                Margin="0"
-                                Text="+"
-                                CornerRadius="28"
-                                WidthRequest="100"
-                                HeightRequest="100"
-                                Padding="0,-8,0,0"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                Clicked="OnAddClicked" />
-                    </Frame>-->
                 </AbsoluteLayout>
-            
             </ScrollView>
         </RefreshView>
 

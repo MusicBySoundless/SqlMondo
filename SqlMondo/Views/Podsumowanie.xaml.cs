@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using Microcharts;
 using SkiaSharp;
-using Xamarin.Essentials;
-using static SqlMondo.Views.Profil;
+using static SqlMondo.UtilityMethods;
 using static SqlMondo.App;
 using System.Windows.Input;
 
@@ -23,7 +22,7 @@ namespace SqlMondo.Views
                 BackgroundColor = SKColor.Parse("#00FFFFFF"),
                 LabelTextSize = 28,
                 AnimationDuration = TimeSpan.FromMilliseconds(750),
-                MaxValue = 1,
+                MaxValue = 100,
                 Margin = 15
             };
             ICommand RefreshCommand = new Command(() =>
@@ -47,7 +46,6 @@ namespace SqlMondo.Views
             }
         }
 
-        #region Handling Goals Graph
         void UpdateDailyEntries()
         {
             try
@@ -62,68 +60,40 @@ namespace SqlMondo.Views
 
         private ChartEntry[] GetDailyEntries()
         {
+            float trainingCount = Clamp<float>((float.Parse(GetStats(DateTime.Today).IloscTreningow.ToString()) / float.Parse(ReadSettings().IloscTreningowCel) * 100), 0, 100);
+            float trainingTime = Clamp<float>((float.Parse((GetStats(DateTime.Today).CzasTreningu.TotalMinutes / 60).ToString()) / float.Parse((ReadSettings().CzasTreninguCel.TotalMinutes / 60).ToString()) * 100), 0, 100);
+            float kilometres = Clamp<float>((float.Parse(GetStats(DateTime.Today).Kilometry.ToString()) / float.Parse(ReadSettings().KilometryCel) * 100),0,100);
+            float steps = Clamp<float>((float.Parse(GetStats(DateTime.Today).DzienneKroki.ToString()) / float.Parse(ReadSettings().CelKroki) * 100),0,100);
             ChartEntry[] dailyEntries = new[]
                 {
-                #region NotWorkingData
-                new ChartEntry(float.Parse(GetStats(DateTime.Today).IloscTreningow.ToString()) / float.Parse(GetGoals().IloscTreningowCel))
+                new ChartEntry(trainingCount)
                 {
                     Label = "Ilość treningów",
                     TextColor = SKColor.Parse("#CCCCCC"),
                     ValueLabelColor = SKColor.Parse("#ee9a3a"),
                     Color = SKColor.Parse("#ee9a3a")
                 },
-                new ChartEntry(float.Parse((GetStats(DateTime.Today).CzasTreningu.TotalMinutes/60).ToString()) / float.Parse(GetGoals().CzasTreninguCel))
+                new ChartEntry(trainingTime)
                 {
                     Label = "Czas treningu",
                     TextColor = SKColor.Parse("#CCCCCC"),
                     ValueLabelColor = SKColor.Parse("#eb548c"),
                     Color = SKColor.Parse("#eb548c")
                 },
-                new ChartEntry(float.Parse(GetStats(DateTime.Today).Kilometry.ToString()) / float.Parse(GetGoals().KilometryCel))
+                new ChartEntry(kilometres)
                 {
                     Label = "Kilometry",
                     TextColor = SKColor.Parse("#CCCCCC"),
                     ValueLabelColor = SKColor.Parse("#7d3ac1"),
                     Color = SKColor.Parse("#7d3ac1")
                 },
-                new ChartEntry(float.Parse(GetStats(DateTime.Today).DzienneKroki.ToString()) / float.Parse(GetGoals().CelKroki))
+                new ChartEntry(steps)
                 {
                     Label = "Kroki",
                     TextColor = SKColor.Parse("#CCCCCC"),
                     ValueLabelColor = SKColor.Parse("#1de4bd"),
                     Color = SKColor.Parse("#1de4bd")
                 }
-                #endregion
-                //#region TestData
-                //new ChartEntry(26)
-                //{
-                //    Label = "Ilość treningów",
-                //    TextColor = SKColor.Parse("#CCCCCC"),
-                //    ValueLabelColor = SKColor.Parse("#ee9a3a"),
-                //    Color = SKColor.Parse("#ee9a3a")
-                //},
-                //new ChartEntry(320)
-                //{
-                //    Label = "Czas treningu",
-                //    TextColor = SKColor.Parse("#CCCCCC"),
-                //    ValueLabelColor = SKColor.Parse("#eb548c"),
-                //    Color = SKColor.Parse("#eb548c")
-                //},
-                //new ChartEntry(550)
-                //{
-                //    Label = "Kilometry",
-                //    TextColor = SKColor.Parse("#CCCCCC"),
-                //    ValueLabelColor = SKColor.Parse("#7d3ac1"),
-                //    Color = SKColor.Parse("#7d3ac1")
-                //},
-                //new ChartEntry(345)
-                //{
-                //    Label = "Kroki",
-                //    TextColor = SKColor.Parse("#CCCCCC"),
-                //    ValueLabelColor = SKColor.Parse("#1de4bd"),
-                //    Color = SKColor.Parse("#1de4bd")
-                //}
-                //#endregion
             };
             return dailyEntries;
         }
@@ -143,72 +113,9 @@ namespace SqlMondo.Views
             return dailyStats;
         }
 
-        public ProfileSettings GetGoals()
+        async void OnAccClicked(object sender, EventArgs e)
         {
-            ProfileSettings settings = new ProfileSettings();
-            var profilePath = Path.Combine(App.FolderPath, "profile.json");
-            try
-            {
-                settings = JsonConvert.DeserializeObject<ProfileSettings>(File.ReadAllText(@profilePath));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            return settings;
-        }
-        #endregion
-
-        async void OnAddClicked(object sender, EventArgs e)
-        {
-            // Navigate to the NoteEntryPage, without passing any data.
-            try
-            {
-                await Shell.Current.GoToAsync(nameof(DodajAktywnosc));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-        async void CheckPerm()
-        {            
-            var status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
-            if (status != PermissionStatus.Granted)
-            {
-                try
-                {
-                    status = await Permissions.RequestAsync<Permissions.StorageRead>();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-            status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
-            if (status != PermissionStatus.Granted)
-            {
-                try
-                {
-                    status = await Permissions.RequestAsync<Permissions.StorageWrite>();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-            status = await Permissions.CheckStatusAsync<Permissions.NetworkState>();
-            if (status != PermissionStatus.Granted)
-            {
-                try
-                {
-                    status = await Permissions.RequestAsync<Permissions.NetworkState>();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
+            await Navigation.PushAsync(new Konto());
         }
     }
 }

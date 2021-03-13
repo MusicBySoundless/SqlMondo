@@ -13,8 +13,8 @@
         <Label Text="Dodawanie aktywności"
                FontSize="Large" />
         <Editor x:Name="Nazwa" Placeholder="Nazwa aktywności"
-                Text="{Binding Nazwa}" />
-        <Picker x:Name="Rodzaj" SelectedIndex="{Binding RodzajId}"  SelectedItem="{Binding Rodzaj}" HorizontalOptions="FillAndExpand" Title="Rodzaj aktywności">
+                Text="{Binding Name}" />
+        <Picker x:Name="Type" SelectedIndex="{Binding TypeId}"  SelectedItem="{Binding Type}" HorizontalOptions="FillAndExpand" Title="Rodzaj aktywności">
             <Picker.Items>
                 <x:String>Bieg</x:String>
                 <x:String>Inna</x:String>
@@ -22,7 +22,7 @@
                 <x:String>Spacer</x:String>
             </Picker.Items>
         </Picker>
-        <DatePicker x:Name="dataPicker" Date="{Binding Data}" Format="D"
+        <DatePicker x:Name="dataPicker" Date="{Binding Date}" Format="D"
                     />
         <Grid ColumnDefinitions="*,*">
             <Label Text="Początek" />
@@ -36,17 +36,17 @@
         <Label Text="Inne" Margin="0, 20, 0, 0"/>
         <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>
         <Editor Placeholder="Uwagi"
-                Text="{Binding Uwagi}" />
+                Text="{Binding Info}" />
         <Grid ColumnDefinitions="*,*">
             <Editor Placeholder="Kalorie"
-                    Text="{Binding Kalorie}" 
+                    Text="{Binding Calories}"
                     Keyboard="Numeric"/>
             <Editor Grid.Column="1"
                     Placeholder="Kroki"
-                    Text="{Binding Kroki}"
+                    Text="{Binding Steps}"
                     Keyboard="Numeric"/>
             <Editor Grid.Row="1" Placeholder="Kilometry"
-                    Text="{Binding Kilometry}"
+                    Text="{Binding Kilometres}"
                     Keyboard="Numeric"/>
         </Grid>
     </StackLayout>

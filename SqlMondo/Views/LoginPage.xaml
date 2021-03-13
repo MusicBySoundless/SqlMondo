@@ -1,23 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SqlMondo.Views.Konto"
-             Title="Zarządzanie kontem">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Wyloguj"
-                      />
-    </ContentPage.ToolbarItems>
+             x:Class="SqlMondo.Views.LoginPage">
     <ContentPage.Content>
         <StackLayout>
             <Grid ColumnDefinitions="*,35"
                   Margin="10">
+                <Label Text="Witaj w SQLMondo!"
+                       FontSize="40"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Grid.ColumnSpan="2"/>
                 <Entry x:Name="loginEditor" Placeholder="Login"
+                       Grid.Row="2"
                         Grid.ColumnSpan="2"
                        TextColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"
                        PlaceholderColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"
                        Text="{Binding Login}"/>
                 <Entry x:Name="passwordEditor" Placeholder="Password"
-                        Grid.Row="1"
+                        Grid.Row="3"
                         Grid.ColumnSpan="2"
                        IsPassword="True"
                        TextColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"
@@ -25,20 +26,27 @@
                        Text="{Binding Password}"/>
                 <Button Text="Login"
                         Clicked="LoginButton"
-                        Grid.Row="2"
+                        Grid.Row="4"
                         Grid.ColumnSpan="2"/>
                 <Label x:Name="resultLabel"
-                       Grid.Row="3"
+                       Grid.Row="5"
                        Grid.ColumnSpan="2"
                        TextColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"/>
                 <Button Text="*"
-                        Grid.Row="1"
+                        Grid.Row="3"
                         Grid.Column="1"
                         BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#121212}"
                         WidthRequest="25"
                         HeightRequest="25"
                         TextColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"
                         Clicked="PasswordToggle"/>
+                <Button Text="Nie posiadasz konta? Zarejestruj się!"
+                        FontSize="Large"
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        TextTransform="None"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#121212}"
+                        TextColor="{AppThemeBinding Light=#222222, Dark=#CCCCCC}"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

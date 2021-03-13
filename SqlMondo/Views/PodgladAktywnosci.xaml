@@ -13,8 +13,8 @@
         <Label x:Name="Label" Text=""
                FontSize="Large" />
         <Editor x:Name="Nazwa" Placeholder="Nazwa aktywności"
-                Text="{Binding Nazwa}" IsEnabled="False" />
-        <Picker x:Name="Rodzaj" SelectedIndex="{Binding RodzajId}"  SelectedItem="{Binding Rodzaj}" HorizontalOptions="FillAndExpand" Title="Rodzaj aktywności" IsEnabled="False">
+                Text="{Binding Name}" IsEnabled="False" />
+        <Picker x:Name="Rodzaj" SelectedIndex="{Binding TypeId}"  SelectedItem="{Binding Type}" HorizontalOptions="FillAndExpand" Title="Rodzaj aktywności" IsEnabled="False">
             <Picker.Items>
                 <x:String>Bieg</x:String>
                 <x:String>Inna</x:String>
@@ -22,7 +22,7 @@
                 <x:String>Spacer</x:String>
             </Picker.Items>
         </Picker>
-        <DatePicker x:Name="dataPicker" Date="{Binding Data}" Format="D"
+        <DatePicker x:Name="dataPicker" Date="{Binding Date}" Format="D"
                     MinimumDate="01/01/2021" IsEnabled="False"/>
         <Grid ColumnDefinitions="*,*">
             <Label Text="Początek" />
@@ -36,19 +36,19 @@
         <Label Text="Inne" Margin="0, 20, 0, 0"/>
         <BoxView Color="LightGray" HeightRequest="2" WidthRequest="100"/>
         <Editor x:Name="Uwagi" Placeholder="Uwagi"
-                Text="{Binding Uwagi}" IsEnabled="False"/>
+                Text="{Binding Info}" IsEnabled="False"/>
         <Grid ColumnDefinitions="*,*">
             <Editor x:Name="Kalorie" Placeholder="Kalorie"
-                    Text="{Binding Kalorie}" 
+                    Text="{Binding Calories}"
                     Keyboard="Numeric" IsEnabled="False"/>
             <Editor Grid.Column="1"
                     x:Name="Kroki"
                     Placeholder="Kroki"
-                    Text="{Binding Kroki}"
+                    Text="{Binding Steps}"
                     Keyboard="Numeric" IsEnabled="False"/>
             <Editor Grid.Row="1" Placeholder="Kilometry"
                     x:Name="Kilometry"
-                    Text="{Binding Kilometry}"
+                    Text="{Binding Kilometres}"
                     Keyboard="Numeric" IsEnabled="False"/>
         </Grid>
     </StackLayout>

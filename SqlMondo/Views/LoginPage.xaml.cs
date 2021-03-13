@@ -1,8 +1,9 @@
 ﻿using SqlMondo.Models;
 using System;
-using System.IO;
-using Newtonsoft.Json;
-using Plugin.Permissions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static SqlMondo.UtilityMethods;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,12 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace SqlMondo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Konto : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        public Konto()
+        public LoginPage()
         {
             InitializeComponent();
-            CheckPerm();
             BindingContext = new User();
         }
         private async void LoginButton(object sender, EventArgs e)
@@ -24,8 +24,17 @@ namespace SqlMondo.Views
             var login = await App.RestService.Login(user);
             if (login.JsonToken != "null" && login.Msg == "1")
             {
-                resultLabel.Text = "Zalogowano pomyślnie jako " + user.Login;
-                //UtilityMethods.SaveFile(login, App.InternalStorage, "LoginToken.json");
+                UtilityMethods.SaveFile(login, App.InternalStorage, "LoginToken.json");
+                Console.WriteLine(login.ToString());
+                var settings = ReadSettings();
+                if (!settings.CompletedSetup)
+                {
+                    App.Current.MainPage = new NavigationPage(new SqlMondo.FirstSetupPage());
+                }
+                else
+                {
+                    App.Current.MainPage = new AppShell();
+                }
             }
             else if (login.JsonToken == null)
             {

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:fontAwesome="clr-namespace:FontAwesome"
              x:Class="SqlMondo.Views.Dziennik"
              Title="Dziennik">
 
@@ -52,13 +51,13 @@
                             <Grid ColumnDefinitions="2*,2*,*">
                                 <Label x:Name="CzasRozpoczecia" Text="{Binding ShownDate}" />
 
-                                <Label x:Name="Rodzaj" Text="{Binding Rodzaj}" Grid.Row="1" FontAttributes="Bold"/>
-                                <!--<Label x:Name="Rodzaj"
+                                <Label x:Name="Type" Text="{Binding Type}" Grid.Row="1" FontAttributes="Bold"/>
+                                <!--<Label x:Name="Type"
                                        Grid.Row="1"
                                        FontAttributes="Bold">
                                     <Label.Text>
                                         <MultiBinding StringFormat="{}{0} - {1}">
-                                            <Binding Path="Rodzaj" />
+                                            <Binding Path="Type" />
                                             <Binding Path="Nazwa" />
                                         </MultiBinding>
                                     </Label.Text>
@@ -67,12 +66,12 @@
                                        Grid.Row="2">
                                     <Label.Text>
                                         <MultiBinding StringFormat="{}{0} - {1}">
-                                            <Binding Path="Kilometry" />
+                                            <Binding Path="Kilometres" />
                                             <Binding Path="Duration" />
                                         </MultiBinding>
                                     </Label.Text>
                                 </Label>
-                                <Label x:Name="Kroki" Text="{Binding Kroki}" 
+                                <Label x:Name="Kroki" Text="{Binding Steps}"
                                        Grid.Row="2"
                                        Grid.Column="1"/>
                                 <Frame Grid.RowSpan="3"
@@ -89,23 +88,23 @@
                                             <!--<Trigger TargetType="Image"
                                                      Property="Source"
                                                      Value="other.png">
-                                                
+
                                             </Trigger>-->
 
                                             <DataTrigger TargetType="Image"
-                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Inna">
+                                                         Binding="{Binding Source={x:Reference Type}, Path=Text}" Value="Inna">
                                                 <Setter Property="Source" Value="other.png" />
                                             </DataTrigger>
                                             <DataTrigger TargetType="Image"
-                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Bieg">
+                                                         Binding="{Binding Source={x:Reference Type}, Path=Text}" Value="Bieg">
                                                 <Setter Property="Source" Value="run.png" />
                                             </DataTrigger>
                                             <DataTrigger TargetType="Image"
-                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Spacer">
+                                                         Binding="{Binding Source={x:Reference Type}, Path=Text}" Value="Spacer">
                                                 <Setter Property="Source" Value="walk.png" />
                                             </DataTrigger>
                                             <DataTrigger TargetType="Image"
-                                                         Binding="{Binding Source={x:Reference Rodzaj}, Path=Text}" Value="Jazda na rowerze">
+                                                         Binding="{Binding Source={x:Reference Type}, Path=Text}" Value="Jazda na rowerze">
                                                 <Setter Property="Source" Value="bike.png" />
                                             </DataTrigger>
                                         </Image.Triggers>
@@ -117,11 +116,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Frame 
+        <Frame
             WidthRequest="56"
             HeightRequest="56"
             CornerRadius="28"
-            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds=".95,.95,56,56"
             Padding="0"
             HasShadow="true"
