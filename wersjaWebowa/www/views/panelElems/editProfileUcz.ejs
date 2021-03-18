@@ -1,0 +1,51 @@
+<div class="content">
+    <div class="content-manage">
+        <div class="manage-row">
+            <%-include('../partials/newPasswd.ejs');%>
+            <div class="edit-class-img-div">
+                <img src="/public/img/lock-new.png">
+            </div>
+        </div>
+        
+        <div class="manage-row">
+            <% if(!inClass){ %>
+            <div class="form-div">    
+                <form method="POST" action="/api/joinclass" style="display: block;">
+                    <span>Dołącz do klasy</span>
+                        <div class="input-div">
+                            <input type="number" name="class_code" class="input" autocomplete="off" required>
+                            <label for="class_code" class="label">
+                                <span class="label-text">Kod klasy</span>
+                            </label>
+                        </div>
+                        <div class="tooltip-right">                                
+                        <input type="submit" value="" class="submit-add">
+                        <span class="tooltiptext-right">Zatwierdź</span></div>
+                </form>  
+            </div>
+            
+            <div class="edit-class-img-div">
+                <img src="/public/img/adduser-new.png">
+            </div>
+            <%}else{ %>
+                <div class="form-div">
+                    <form method="POST" action="/api/leave">
+    
+                        <span id="paragraph">Opuść klasę: <%= inClass %></span>
+    
+                        <div class="tooltip-right">                                
+                        <input type="submit" value="" class="submit-confirm" id="submit">
+                        <span class="tooltiptext-right">Zatwierdź</span></div>
+                        
+                    </form>
+                </div>
+                <div class="edit-class-img-div">
+                    <img src="/public/img/deleteuser-new.png">
+                </div>
+            <%} %>
+        </div>
+        
+    </div>
+</div>
+<div class="right-corner">
+</div>

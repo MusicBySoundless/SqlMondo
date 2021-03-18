@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="icon" href="/public/img/favicon.png">
+    <title>Strona główna</title>
+    <meta charsrt="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/styling_form.css">
+</head>
+<body>
+    <div class="header">
+        <% if(login){ %>
+            <div><a href="/user/<%= login%>">Profil</a></div>
+        <% }else{ %>
+            <%- include('../partials/loginRegisterButtons'); %>
+        <% } %>
+    </div>
+    <div class="content">
+        <img class="img" src="/public/img/kayak.png">
+        <img class="img" src="/public/img/yoga.png">
+        <img class="img" src="/public/img/swimming.png">
+        <img class="img" src="/public/img/jazdakonno.png">
+        <div class="left">
+            <div>
+                <div><img src="/public/img/jogging.png"></div>
+                <p>SQL-Mondo</p>
+                <span>Twoja aktywność - codziennie.</span>
+            </div>
+        </div>
+        <div class="right">
+            <img src="/public/img/images.png">
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+
+</html>

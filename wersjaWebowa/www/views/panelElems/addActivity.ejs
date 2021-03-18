@@ -1,0 +1,104 @@
+<div class="content">
+    <div class="content-add-activity">
+        <div class="add-activity-div">
+            <div class="add-activity-left"></div>
+            <div class="add-activity-form">
+                <div class="form-div">
+                    <form method="POST" action="/api/aktywnosc" style="display: block;">
+
+                        <span>Dane aktywności</span>
+
+                        <div class="input-div">
+                            <input type="text" name="Nazwa" class="input" autocomplete="off" required>
+                            <label for="Nazwa" class="label" style="font-size: 26px;">
+                                <span class="label-text">Nazwa aktywności</span>
+                            </label>
+                        </div>
+                        
+                        <div class="input-div">
+                            <select name="Rodzaj" class="input" required>
+                                <option disabled selected value style="display: none;"></option>
+                                <option>Bieg</option>
+                                <option>Jazda na rowerze</option>
+                                <option>Spacer</option>
+                                <option>Inna</option>
+                            </select>
+                            <label for="Rodzaj" class="label" style="font-size: 26px;">
+                                <span class="label-text">Rodzaj</span>
+                            </label>
+                        </div>
+
+                        <hr>
+                        
+                        <span>Czas aktywności</span>
+
+                        <div class="input-div">
+                            <input type="date" name="Data" class="input" autocomplete="off" required placeholder="">
+                            <label for="Data" class="label" style="font-size: 26px;">
+                                <span class="label-text">Data</span>
+                            </label>
+                        </div>
+
+                        <div class="input-div">
+                            <!-- <input type="text" name="StartTime" class="input" autocomplete="off" required> -->
+                            <input type="time" name="StartTime" class="input" autocomplete="off" required>
+                            <label for="StartTime" class="label" style="font-size: 26px;">
+                                <span class="label-text">Rozpoczęto</span>
+                            </label>
+                        </div>
+
+                        <div class="input-div">
+                            <!-- <input type="text" name="EndTime" class="input" autocomplete="off" required> -->
+                            <input type="time" name="EndTime" class="input" autocomplete="off" required>
+                            <label for="EndTime" class="label" style="font-size: 26px;">
+                                <span class="label-text">Zakończono</span>
+                            </label>
+                        </div>
+
+                        <hr>
+
+                        <span>Podsumowanie</span>
+
+                        <div class="input-div">
+                            <input type="number" name="Kalorie" class="input" autocomplete="off" required>
+                            <label for="Kalorie" class="label" style="font-size: 26px;">
+                                <span class="label-text">Kalorie</span>
+                            </label>
+                        </div>
+
+                        <div class="input-div">
+                            <input type="number" name="Kroki" class="input" autocomplete="off" required>
+                            <label for="Kroki" class="label" style="font-size: 26px;">
+                                <span class="label-text">Kroki</span>
+                            </label>
+                        </div>
+
+                        <div class="input-div">
+                            <input type="number" name="Kilometry" class="input" step="0.01" autocomplete="off" required>
+                            <label for="Kilometry" class="label" style="font-size: 26px;">
+                                <span class="label-text">Kilometry</span>
+                            </label>
+                        </div>
+
+                        <hr>
+                        
+                        <span>Inne</span>
+
+                        <div class="input-div">
+                            <input type="text" name="Uwagi" class="input" autocomplete="off" value="Brak uwag">
+                            <label for="Uwagi" class="label" style="font-size: 26px;">
+                                <span class="label-text">Uwagi</span>
+                            </label>
+                        </div>
+                        <div class="tooltip-right">                
+                        <input type="submit" value="" class="submit-add">
+                        <span class="tooltiptext-right">Dodaj aktywność</span></div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right-corner">
+</div>

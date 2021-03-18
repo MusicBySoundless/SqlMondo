@@ -1,0 +1,53 @@
+<div class="content">
+    <div class="content-mysummary">
+        <div class="trivia">
+            <div class="activity-sum">
+    
+            </div>
+        </div>
+        <div class="diagrams-container">
+            <div class="diagram-container"><canvas id="myChart2"></canvas></div>
+            <div class="diagram-container"><canvas id="myChart3"></canvas></div>
+            <div class="diagram-container"><canvas id="myChart5"></canvas></div>
+            <div class="diagram-container"><canvas id="myChart1"></canvas></div>
+            <div class="diagram-container"><canvas id="myChart"></canvas></div>
+        </div>
+    </div>
+</div>
+<div class="right-corner">
+    <div class="form-right-corner-div">
+        <div class="form-div">
+            <form id="form" onsubmit="return a(event)" class="form-right-corner">
+                <div class="input-div">
+                    <select name="summaryclass" class="input" required
+                        onchange="getStudents(this.options[this.selectedIndex].attributes.name)">
+                        <option disabled selected value style="display: none;"></option>
+                        <% klasyArr.forEach(element=> { %>
+                            <option name="<%= element[1]%>">
+                                <%= element[0] %>
+                            </option>
+                            <%});%>
+                    </select>
+                    <label for="summaryclass" class="label" style="font-size: 26px;">
+                        <span class="label-text">Klasa</span>
+                    </label>
+                </div>
+                <div class="input-div">
+                    <select name="summarystudent" class="input" required>
+                        <option disabled selected value style="display: none;"></option>
+                    </select>
+                    <label for="summarystudent" class="label" style="font-size: 26px;">
+                        <span class="label-text">Uczeń</span>
+                    </label>
+                </div>
+                <div class="tooltip-right-top-form">            
+                <input type="submit" value="" class="submit-confirm">
+                <span class="tooltiptext-right-top-form">Zatwierdź</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        sessionStorage.setItem('summarystudentselect', document.querySelector("select[name='summarystudent']").outerHTML);
+    </script>
+</div>
