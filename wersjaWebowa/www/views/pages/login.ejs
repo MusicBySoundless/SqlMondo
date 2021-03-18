@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head'); %>
+    <link rel="stylesheet" href="/public/profile_style.css">
+    <link rel="stylesheet" href="/public/styling_form.css">
+    <body>
+        <div class="main">
+
+            <div class="previous">
+                <a class="button flip" href="http://46.41.137.179/">
+                    <div class="arrow"></div>
+                </a>
+            </div>
+            <div class="add-activity-div">
+                <div class="form-basic-left"></div>
+                <div class="form-basic">
+                    <% if(type==="login"){ %>
+                        <%- include('../partials/login_form'); %>
+                    <% }else{ %>
+                        <%- include('../partials/register_form'); %>
+                    <% } %>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

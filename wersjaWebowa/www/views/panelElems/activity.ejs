@@ -1,0 +1,135 @@
+<div class="content">
+    <div class="content-history">
+    <div class="activity-column">
+    <% for(let date in userActivity){ %>
+        <div class="activity-div-day">
+            <h2 class="activity-date"><%=date%></h2>
+            <% userActivity[date].forEach(act=>{ %>
+                    <div class="activity-row" onclick="eap.setData = this">
+                        <div class="single-activity">
+                        <span><%= act.Nazwa %> <span><%=act.StartTime %> - <%=act.EndTime %></span></span>
+                        <span><b><%=act.Rodzaj%></b> - <%=act.Kilometry %>km - Kroki: <%=act.Kroki %></span>
+                        <span>Kalorie: <%=act.Kalorie %></span>
+                        <span><%=act.Uwagi %></span>
+                        </div>
+                        <div class="activity-img">
+                            <div class="tooltip-bottom">
+                            <span class="tooltiptext-bottom">Kliknij, aby edytować</span></div>
+                            <img src="/public/img/activity/<%=act.Rodzaj%>.png" alt="<%=act.Rodzaj%>">
+                        </div>
+                    </div>
+            <%});%>
+        </div>
+    <%} %>
+    </div>
+    <!--TUTAJ BLOK EDYCJI-->
+    <div class="add-activity-div">
+        <div class="add-activity-left">
+            <form method="post" action="/api/usunaktywnosc" onsubmit="return eap.areYouSure()">
+                <input type="text" style="display:none;" name="Data" class="delAct">
+                <input type="text" style="display:none;"  name="StartTime" class="delAct">
+                <div class="tooltip-cancel">
+                <input type="submit" class="submit-cancel" name="DeleteSubmit" value="">
+                <span class="tooltiptext-cancel">Usuń aktywność</span></div>
+            </form>
+        </div>
+        <div class="add-activity-form">
+            <div class="form-div">
+                <form method="POST" action="/api/edit" style="display: block;" onsubmit>
+
+                    <span>Dane aktywności</span>
+
+                    <div class="input-div">
+                        <input type="text" name="Nazwa" class="input" autocomplete="off" required>
+                        <label for="Nazwa" class="label" style="font-size: 26px;">
+                            <span class="label-text">Nazwa aktywności</span>
+                        </label>
+                    </div>
+                    
+                    <div class="input-div">
+                        <select name="Rodzaj" class="input" required>
+                            <option disabled selected value style="display: none;"></option>
+                            <option>Bieg</option>
+                            <option>Jazda na rowerze</option>
+                            <option>Spacer</option>
+                            <option>Inna</option>
+                        </select>
+                        <label for="Rodzaj" class="label" style="font-size: 26px;">
+                            <span class="label-text">Rodzaj</span>
+                        </label>
+                    </div>
+
+                    <hr>
+                    
+                    <span>Czas aktywności</span>
+
+                    <div class="input-div">
+                        <!-- <input type="text" name="Data" class="input" autocomplete="off" required> -->
+                        <input type="date" name="NowaData" class="input" autocomplete="off" required placeholder="">
+                        <label for="NowaData" class="label" style="font-size: 26px;">
+                            <span class="label-text">Data</span>
+                        </label>
+                    </div>
+
+                    <div class="input-div">
+                        <!-- <input type="text" name="StartTime" class="input" autocomplete="off" required> -->
+                        <input type="time" name="NewStartTime" class="input" autocomplete="off" required>
+                        <label for="NewStartTime" class="label" style="font-size: 26px;">
+                            <span class="label-text">Rozpoczęto</span>
+                        </label>
+                    </div>
+
+                    <div class="input-div">
+                        <!-- <input type="text" name="EndTime" class="input" autocomplete="off" required> -->
+                        <input type="time" name="EndTime" class="input" autocomplete="off" required>
+                        <label for="EndTime" class="label" style="font-size: 26px;">
+                            <span class="label-text">Zakończono</span>
+                        </label>
+                    </div>
+
+                    <hr>
+
+                    <span>Podsumowanie</span>
+
+                    <div class="input-div">
+                        <input type="number" name="Kalorie" class="input" autocomplete="off" required>
+                        <label for="Kalorie" class="label" style="font-size: 26px;">
+                            <span class="label-text">Kalorie</span>
+                        </label>
+                    </div>
+
+                    <div class="input-div">
+                        <input type="number" name="Kroki" class="input" autocomplete="off" required>
+                        <label for="Kroki" class="label" style="font-size: 26px;">
+                            <span class="label-text">Kroki</span>
+                        </label>
+                    </div>
+
+                    <div class="input-div">
+                        <input type="number" name="Kilometry" class="input" step="0.01" autocomplete="off" required>
+                        <label for="Kilometry" class="label" style="font-size: 26px;">
+                            <span class="label-text">Kilometry</span>
+                        </label>
+                    </div>
+
+                    <hr>
+
+                    <span>Inne</span>
+
+                    <div class="input-div">
+                        <input type="text" name="Uwagi" class="input" autocomplete="off">
+                        <label for="Uwagi" class="label" style="font-size: 26px;">
+                            <span class="label-text">Uwagi</span>
+                        </label>
+                    </div>
+                        <input type="text" name="StaraData" style="display:none;">
+                        <input type="text" name="OldStartTime" style="display:none;">    
+                        <div class="tooltip-right">            
+                        <input type="submit" value="" name="EditSubmit" class="submit-confirm" disabled>
+                        <span class="tooltiptext-right">Zatwierdź zmiany</span></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
