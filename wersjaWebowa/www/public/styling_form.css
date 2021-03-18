@@ -1,0 +1,340 @@
+.form-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    justify-content: center;
+}
+
+.input-div {
+    position: relative;
+    margin-right: 10px;
+    width: 250px;
+    transition: 0s ease-in-out;
+}
+
+.input-div input {
+    position: relative;
+    width: 100%;
+    padding-top: 20px;
+    border: none;
+    font-size: 20px;
+    outline: none;
+    background-color: transparent;
+}
+
+
+.input-div label {
+    font-size: 26px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 100px;
+    left: 0%;
+    pointer-events: none;
+    border-bottom: 1px solid;
+}
+
+.input-div label:after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    border-bottom: 3px solid #e4a310;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.label-text {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.form-div input:focus + .label .label-text,
+.form-div input:valid + .label .label-text {
+    transform: translateY(-100%);
+    font-size: 16px;
+    color: #edce65;
+}
+
+.form-div input:focus + .label #error,
+.form-div input:valid + .label #error {
+    opacity: 0;
+}
+
+.form-div input:focus + .label::after,
+.form-div input:valid + .label::after {
+    transform: scaleX(1);
+}
+
+.form-div select:focus + .label .label-text,
+.form-div select:valid + .label .label-text {
+    transform: translateY(-100%);
+    font-size: 16px;
+    color: #edce65;
+}
+
+.form-div select:focus + .label::after,
+.form-div select:valid + .label::after {
+    transform: scaleX(1);
+}
+
+select {
+    outline: 0;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: transparent;
+    width: 250px !important;
+}
+
+.tooltip-right {
+  margin-top: 10px;
+}
+
+input.submit-add[type="submit"], input.submit-confirm[type="submit"], input.submit-cancel[type="submit"]{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    background-size: 100%;
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.25);
+}
+
+#error {
+    color: red;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    bottom: 26px;
+}
+
+.submit-add {
+    background: url("/public/img/add.png");
+    position: absolute;
+    bottom: 4px;
+    right: -40px;
+}
+    
+.submit-confirm {
+    background: url("/public/img/confirm.png");
+    position: absolute;
+    bottom: 4px;
+    right: -40px;
+}
+
+.btn-grad {
+    background-image: linear-gradient(
+      to right,
+      #ff512f 0%,
+      #f09819 51%,
+      #ff512f 100%
+    );
+  }
+  
+  .btn-grad {
+    margin: 10px 50px;
+    padding: 15px 0;
+    width: 150px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border: 1px solid orange;
+    outline: none;
+    transition: background-position 0.5s;
+  }
+  
+  hr {
+      border-color: orange;
+  }
+
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .tooltip-copy {
+    position: relative;
+  }
+  
+  .tooltip-copy .tooltiptext-copy {
+    visibility: hidden;
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: 80px;
+    margin-left: -60px;
+  }
+  
+  .tooltip-copy .tooltiptext-copy::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+  
+  .tooltip-bottom {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip-bottom .tooltiptext-bottom {
+    visibility: hidden;
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 162%;
+    left: -120px;
+    margin-left: -60px;
+  }
+  
+  .tooltip-bottom .tooltiptext-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+  
+  .activity-row:hover .tooltiptext-bottom {
+    visibility: visible;
+  }
+
+  input:hover + .tooltiptext-copy {
+    visibility: visible;
+  }
+
+  .tooltip-copy input {
+      background-color: orange;
+      text-align: center;
+      padding: 10px;
+      border: 1px orange solid;
+      transition: border 0.2s;
+      outline: none;
+      border-radius: 10px;
+      box-sizing: border-box;
+  }
+
+  .tooltip-copy input:hover {
+    border: 1px rgb(228, 130, 19) solid;
+}
+
+#submit {
+    margin-left: 20px;
+}
+
+#paragraph {
+  font-size: 26px;
+  margin: 0 4px 0 0;
+}
+
+@media screen and (max-width: 750px) {
+  .input-div {
+    position: relative;
+    margin-right: 10px;
+    width: 140px;
+    transition: 0s ease-in-out;
+}
+
+.input-div input {
+  position: relative;
+  width: 100%;
+  padding-top: 20px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  background-color: transparent;
+}
+
+.input-div label {
+  font-size: 14px;
+}
+.form-div input:focus + .label .label-text,
+.form-div input:valid + .label .label-text {
+    transform: translateY(-100%);
+    font-size: 12px;
+    color: #edce65;
+}
+
+.form-div input:focus + .label #error,
+.form-div input:valid + .label #error {
+    opacity: 0;
+}
+
+.form-div input:focus + .label::after,
+.form-div input:valid + .label::after {
+    transform: scaleX(1);
+}
+
+.form-div select:focus + .label .label-text,
+.form-div select:valid + .label .label-text {
+    transform: translateY(-100%);
+    font-size: 12px;
+    color: #edce65;
+}
+
+.form-div select:focus + .label::after,
+.form-div select:valid + .label::after {
+    transform: scaleX(1);
+}
+
+#paragraph {
+  font-size: 16px;
+}
+
+select {
+    outline: 0;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: transparent;
+    width: 250px !important;
+}
+
+.tooltiptext-right {
+  display: none;
+}
+}
